@@ -1,1 +1,1 @@
-https://github.com/randmon/happy-desktop
+https://randmon.github.io/happy-desktop/
