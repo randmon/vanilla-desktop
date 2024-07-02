@@ -1,0 +1,151 @@
+* {
+  /* Retro aesthetic */
+  font-family: 'Roboto Mono', monospace;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f4ecff;
+  background-image: linear-gradient(to right, rgba(224, 180, 243, 0.6) 1px, transparent 1px), linear-gradient(to bottom, rgba(224, 180, 243, 0.6) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.toggleableWindow {
+  position: absolute;
+  border: 1px solid #d3d3d3;
+  width: 300px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.2s;
+}
+
+.toggleableWindowHeader {
+  padding: 10px;
+  cursor: default;
+  z-index: 10;
+  /* background: url(https://grainy-gradients.vercel.app/noise.svg), linear-gradient(to right, #dc7bff 0%, #64cbed 100%); */
+  background: url(https://grainy-gradients.vercel.app/noise.svg), linear-gradient(90deg, rgba(253, 47, 255, 1) 0%, rgba(121, 171, 255, 1) 23%, rgba(54, 214, 150, 1) 38%, rgba(255, 223, 80, 1) 62%, rgba(141, 255, 166, 1) 84%, rgba(97, 179, 245, 1) 100%);
+  background-attachment: fixed;
+  color: #fff;
+  text-align: left;
+}
+
+.toggleableWindowHeader p {
+  margin: 0 30px 0 0;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.windowContent {
+  padding: 10px;
+  overflow: auto;
+  background-color: #f3f1f6f4;
+  background-attachment: fixed;
+  color: #000;
+}
+
+nav {
+  background-color: #d9c4ff;
+  border-bottom: 2px solid #a08bc7;
+  box-sizing: border-box;
+}
+
+.navbar {
+  padding: 3px;
+}
+
+nav li button {
+  max-width: 150px;
+  min-width: 90px;
+  margin-left: 3px;
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+nav button {
+  background: linear-gradient(165deg, #e9dffd 0%, #b092f0 100%);
+  border: 2px solid #ffffff00;
+}
+
+nav button:hover {
+  background: linear-gradient(165deg, #b799ed 0%, #b0cbf7 100%);
+}
+
+nav .navbar-brand {
+  padding: 5px 25px;
+  margin: 0;
+  transition: background-color 0.2s;
+}
+
+nav .navbar-brand i {
+  font-size: 1.2em;
+  color: rgba(35, 32, 54, 0.6);
+}
+
+nav .navbar-brand:hover i {
+  color: #000000ff;
+}
+
+.navbar-nav .nav-link {
+  padding: 5px 10px;
+}
+
+#desktopButton {
+  width: 30px;
+  height: 38px;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 35px;
+  background-color: #c0b1db;
+  background: url(https://grainy-gradients.vercel.app/noise.svg), linear-gradient(to right, rgb(255, 218, 240) 0%, #e39dfd 25%, #a6dbec 60%, #7aedc5 100%);
+  color: #0000009e;
+  text-align: center;
+  line-height: 35px;
+}
+
+img {
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.desktopIcon {
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  margin: 15px;
+  color: #364ae4;
+}
+
+.desktopIcon img {
+  width: 80px;
+  margin-bottom: 5px;
+  transition: filter 0.2s;
+  filter: grayscale(0.6) sepia(0);
+}
+
+.desktopIcon:hover img {
+  filter: grayscale(0) sepia(0.6);
+}
+
+.desktopIcon:hover {
+  background-color: #ffffff61;
+  border: 2px solid #ffffffbb;
+  color: #7382fa;
+  text-decoration: underline 2px solid #7382fa;
+}
