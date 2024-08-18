@@ -31,28 +31,29 @@
         <i class="fa-solid fa-burger"></i>
       </button>
       <div class="dropdown-menu" aria-labelledby="home-button">
-        <a id="window1StartMenuButton" class="dropdown-item">Welcome!</a>
-        <a id="window2StartMenuButton" class="dropdown-item">Frog</a>
+        <a id="window1-start-menu-button" class="dropdown-item">Welcome!</a>
+        <a id="window2-start-menu-button" class="dropdown-item">Frog</a>
         <div class="dropdown-divider"></div>
-        <a id="window3StartMenuButton" class="dropdown-item">Window3</a>
+        <a id="window3-start-menu-button" class="dropdown-item">Window3</a>
       </div>
       <ul class="navbar-nav mr-auto flex-row">
-        <li class="nav-item"></li>
         <li class="nav-item">
-          <button class="nav-link" id="window1-taskbar-button">Welcome!</button>
+          <button class="nav-link" id="window1-taskbar-button">
+            Welcome!
+          </button>
         </li>
         <li class="nav-item">
-          <button class="nav-link" id="window2-taskbar-button" href="#">
+          <button class="nav-link" id="window2-taskbar-button">
             FrogFrogFrogFrogFrogFrogFrogFrogFrogFrogFrog
           </button>
         </li>
-        <li>
-          <button class="nav-link" id="window3-taskbar-button" id="testDropdown">
+        <li class="nav-item">
+          <button class="nav-link" id="window3-taskbar-button">
             Window 3
           </button>
         </li>
       </ul>
-      <button id="desktopButton"></button>
+      <button id="desktop-button"></button>
     </nav>
     <main>
       <div class="d-flex flex-column p-4">
@@ -92,18 +93,16 @@
       </div>
     </main>
     <!-- Windows -->
-    <div
-      class="toggleableWindow"
-      id="window1"
+    <div class="toggleableWindow" id="window1"
       style="visibility: visible; opacity: 1; top: 90px; left: 150px"
     >
       <div
         class="toggleableWindowHeader d-flex flex-row justify-content-between"
-        id="window1header"
+        id="window1-header"
       >
         <p>Welcome!</p>
         <div class="d-flex flex-row">
-          <button id="window1MinimizeButton" class="ml-1">
+          <button id="window1-minimize-button" class="ml-1">
             <i class="fa-regular fa-window-minimize"></i>
           </button>
           <button class="ml-1"><i class="fa-regular fa-x"></i></button>
@@ -117,11 +116,11 @@
     <div class="toggleableWindow" id="window2">
       <div
         class="toggleableWindowHeader d-flex flex-row justify-content-between"
-        id="window2header"
+        id="window2-header"
       >
         <p>FrogFrogFrogFrogFrogFrogFrogFrogFrogFrogFrog</p>
         <div class="d-flex flex-row">
-          <button class="ml-1">
+          <button id="window2-minimize-button" class="ml-1">
             <i class="fa-regular fa-window-minimize"></i>
           </button>
           <button class="ml-1"><i class="fa-regular fa-x"></i></button>
@@ -134,11 +133,11 @@
     <div class="toggleableWindow" id="window3">
       <div
         class="toggleableWindowHeader d-flex flex-row justify-content-between"
-        id="window3header"
+        id="window3-header"
       >
         <p>Window 3</p>
         <div class="d-flex flex-row">
-          <button class="ml-1">
+          <button id="window3-minimize-button" class="ml-1">
             <i class="fa-regular fa-window-minimize"></i>
           </button>
           <button class="ml-1"><i class="fa-regular fa-x"></i></button>

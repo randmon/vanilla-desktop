@@ -1,21 +1,28 @@
-const amountWindows = 3;
-const debug = false;
+const nWindows = 3;
+const debug = true;
+
 let currentZ = 10;
 
-// https://www.w3schools.com/howto/howto_js_draggable.asp
-// Make the windows draggable:
-for (let i = 1; i <= amountWindows; i++) {
-  const window = document.getElementById(`window${i}`);
-  dragElement(window);
+const log = (message) => {
+  if (debug) console.log(message);
+};
+
+const windows = [];
+for (let i = 1; i <= nWindows; i++) {
+  windows.push(document.getElementById(`window${i}`));
 }
 
-const log = (message) => {if (debug) console.log(message);};
-
+// Make the windows draggable:
+windows.forEach((w) => dragElement(w));
 function dragElement(elmnt) {
-  let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
-  if (document.getElementById(`${elmnt.id}header`)) {
+  let pos1 = 0;
+  let pos2 = 0;
+  let pos3 = 0;
+  let pos4 = 0;
+
+  if (document.getElementById(`${elmnt.id}-header`)) {
     // if present, the header is where you move the DIV from:
-    let header = document.getElementById(`${elmnt.id}header`);
+    const header = document.getElementById(`${elmnt.id}-header`);
     header.onmousedown = dragMouseDown;
     // when click on header, set z-index to currentZ
     header.onclick = function () {};
@@ -76,17 +83,15 @@ function dragElement(elmnt) {
 }
 
 // Make the windows minimizable:
-
-for (let i = 1; i <= amountWindows; i++) {
-  const windowName = "window" + i;
-  const window = document.getElementById(windowName);
-  const windowToggle = document.getElementById(`${windowName}-taskbar-button`);
-  windowToggle.addEventListener("click", () => toggleWindowDisplay(window));
-  window.childNodes[1].childNodes[3].childNodes[1].addEventListener(
+windows.forEach((w) => {
+  const windowToggle = document.getElementById(`${w.id}-taskbar-button`);
+  windowToggle.addEventListener("click", () => toggleWindowDisplay(w));
+  const minimizeButton = document.getElementById(`${w.id}-minimize-button`);
+  minimizeButton.addEventListener(
     "click",
-    () => toggleWindowDisplay(window)
+    () => toggleWindowDisplay(w)
   );
-}
+});
 
 function toggleWindowDisplay(elmnt) {
   if (elmnt.style.visibility != "visible") {
@@ -111,23 +116,20 @@ function toggleWindowDisplay(elmnt) {
   }
 }
 
-let desktopButton = document.getElementById("desktopButton");
+// Show desktop button hides all windows
+const desktopButton = document.getElementById("desktop-button");
 desktopButton.addEventListener("click", () => {
-  for (let i = 1; i <= amountWindows; i++) {
-    const window = document.getElementById("window" + i);
+  windows.forEach((window) => {
     window.style.opacity = "0";
     setTimeout(() => {
       window.style.visibility = "hidden";
     }, 200);
-  }
+  });
 });
 
-// on window resize, make sure windows are not out of bounds
+// on browser window resize, make sure windows are not out of bounds
 window.addEventListener("resize", () => {
-  for (let i = 1; i <= amountWindows; i++) {
-    const window = document.getElementById("window" + i);
-    checkWindowBounds(window);
-  }
+  windows.forEach((w) => checkWindowBounds(w));
 });
 
 function checkWindowBounds(elmnt) {
