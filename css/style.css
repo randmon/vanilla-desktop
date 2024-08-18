@@ -18,7 +18,8 @@ body {
 /* ---- START MENU ---- */
 
 .dropdown-item:hover {
-  background: linear-gradient(165deg, #e9dffd 0%, #b092f0 100%);
+  background: #a08bc7 !important;
+  color: white !important;
 }
 
 /* ---- TASK BAR ---- */

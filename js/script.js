@@ -1,21 +1,29 @@
-const nWindows = 3;
-const debug = true;
+// Variables
 
+const debug = true;
 let currentZ = 10;
 let currentActiveWindow = "window1";
+const applications = [];
 
-const log = (message) => {
-  if (debug) console.log(message);
-};
+// Classes
 
-const startButton = document.getElementById("start-button");
-startButton.addEventListener("click", () => {
-  deactivateAllApps();
-  currentActiveWindow = "start-menu";
-});
+class ApplicationContent {
+  constructor(id, title, content) {
+    this.id = id;
+    this.title = title;
+    this.content = content;
+  }
+}
 
 class Application {
-  constructor(id, window, startButton, taskbarButton, minimizeButton, closeButton) {
+  constructor(
+    id,
+    window,
+    startButton,
+    taskbarButton,
+    minimizeButton,
+    closeButton
+  ) {
     this.id = id;
     this.window = window;
     this.startButton = startButton;
@@ -45,38 +53,154 @@ class Application {
   }
 }
 
-const applications = [];
-for (let i = 1; i <= nWindows; i++) {
-  const id = `window${i}`;
-  const app = new Application(
-    id,
-    document.getElementById(id),
-    document.getElementById(`${id}-start-button`),
-    document.getElementById(`${id}-taskbar-button`),
-    document.getElementById(`${id}-minimize-button`),
-    document.getElementById(`${id}-close-button`)
-  );
-  applications.push(app);
+// Functions
 
-  app.taskbarButton.addEventListener("click", () => {
-    openApp(app);
+function log(message) {
+  if (debug) console.log(message);
+}
+
+function init() {
+  const windows = setupWindows();
+
+  const startButton = document.getElementById("start-button");
+  startButton.addEventListener("click", () => {
+    deactivateAllApps();
+    currentActiveWindow = "start-menu";
   });
-  app.window.addEventListener("mousedown", () => {
-    setActiveApp(app);
+
+  windows.forEach((w) => {
+    const id = `window${w.id}`;
+    const app = new Application(
+      id,
+      document.getElementById(id),
+      document.getElementById(`${id}-start-button`),
+      document.getElementById(`${id}-taskbar-button`),
+      document.getElementById(`${id}-minimize-button`),
+      document.getElementById(`${id}-close-button`)
+    );
+    applications.push(app);
+
+    app.taskbarButton.addEventListener("click", () => {
+      openApp(app);
+    });
+    app.window.addEventListener("mousedown", () => {
+      setActiveApp(app);
+    });
+    makeDraggable(app.window);
+    app.startButton.addEventListener("click", () => {
+      openApp(app);
+    });
+    app.minimizeButton.addEventListener("click", () => {
+      toggleAppDisplay(app);
+    });
+    app.closeButton.addEventListener("click", () => {
+      app.setTaskbarVisible(false);
+      toggleAppDisplay(app);
+    });
   });
-  makeDraggable(app.window);
-  app.startButton.addEventListener("click", () => {
-    openApp(app);
+  openApp(applications[0]);
+
+  // Show desktop button hides all windows
+  const desktopButton = document.getElementById("desktop-button");
+  desktopButton.addEventListener("click", () => {
+    applications.forEach((app) => {
+      app.window.style.opacity = "0";
+      app.taskbarButton.classList.remove("taskbar-active");
+
+      setTimeout(() => {
+        app.window.style.visibility = "hidden";
+      }, 200);
+    });
   });
-  app.minimizeButton.addEventListener("click", () => {
-    toggleAppDisplay(app);
-  });
-  app.closeButton.addEventListener("click", () => {
-    app.setTaskbarVisible(false);
-    toggleAppDisplay(app);
+
+  // on browser window resize, make sure windows are not out of bounds
+  window.addEventListener("resize", () => {
+    applications.forEach((app) => checkWindowBounds(app.window));
   });
 }
-setActiveApp(applications[0]);
+
+function setupWindows() {
+  const windowTemplate = (id, title, content) => `
+    <div
+      class="toggleableWindow"
+      id="window${id}"
+      ${id == 1 ? "style='top: 90px; left: 150px'" : ""}
+    >
+      <div
+        class="toggleableWindow-header d-flex flex-row justify-content-between"
+        id="window${id}-header"
+      >
+        <p>${title}</p>
+        <div class="d-flex flex-row">
+          <button id="window${id}-minimize-button" class="ml-1">
+            <i class="fa-regular fa-window-minimize"></i>
+          </button>
+          <button id="window${id}-close-button" class="ml-1">
+            <i class="fa-regular fa-x"></i>
+          </button>
+        </div>
+      </div>
+      ${content}
+    </div>
+  `;
+
+  const window1Content = `
+  <div class="windowContent">
+    <p>Welcome to this random website!</p>
+    <p>Have a look around 👀</p>
+  </div>
+  `;
+
+  const window2Content = `
+  <div class="windowContent" style="text-align: center">
+    <img src="img/frog_circle.png" alt="" />
+  </div>
+  `;
+
+  const window3Content = `
+  <div class="windowContent">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum molestias
+    quisquam dolores autem impedit accusantium magnam distinctio corrupti
+    accusamus sunt.
+  </div>
+  `;
+
+  const windows = [
+    new ApplicationContent(1, "Welcome!", window1Content),
+    new ApplicationContent(
+      2,
+      "FrogFrogFrogFrogFrogFrogFrogFrogFrogFrogFrog",
+      window2Content
+    ),
+    new ApplicationContent(3, "Lorem Ipsum", window3Content),
+  ];
+
+  windows.forEach((w) => {
+    document.getElementById("desktop").innerHTML += windowTemplate(
+      w.id,
+      w.title,
+      w.content
+    );
+  });
+
+  return windows;
+}
+
+function openApp(app) {
+  // If app is not visible, show it and set active
+  if (app.window.style.visibility != "visible") {
+    toggleAppDisplay(app);
+    setActiveApp(app);
+  } else {
+    // if it is the active window, minimize it
+    if (currentActiveWindow == app.id) {
+      toggleAppDisplay(app);
+    } else {
+      // if it is not the active window, set it as active
+      setActiveApp(app);
+    }
+  }
+}
 
 function setActiveApp(app) {
   deactivateAllApps();
@@ -153,22 +277,6 @@ function makeDraggable(elmnt) {
   }
 }
 
-function openApp(app) {
-  // If app is not visible, show it and set active
-  if (app.window.style.visibility != "visible") {
-    toggleAppDisplay(app);
-    setActiveApp(app);
-  } else {
-    // if it is the active window, minimize it
-    if (currentActiveWindow == app.id) {
-      toggleAppDisplay(app);
-    } else {
-      // if it is not the active window, set it as active
-      setActiveApp(app);
-    }
-  }
-}
-
 function toggleAppDisplay(app) {
   if (app.window.style.visibility != "visible") {
     log(`showing element [${app.window.id}]`);
@@ -197,24 +305,6 @@ function toggleAppDisplay(app) {
   }
 }
 
-// Show desktop button hides all windows
-const desktopButton = document.getElementById("desktop-button");
-desktopButton.addEventListener("click", () => {
-  applications.forEach((app) => {
-    app.window.style.opacity = "0";
-    app.taskbarButton.classList.remove("taskbar-active");
-
-    setTimeout(() => {
-      app.window.style.visibility = "hidden";
-    }, 200);
-  });
-});
-
-// on browser window resize, make sure windows are not out of bounds
-window.addEventListener("resize", () => {
-  applications.forEach((app) => checkWindowBounds(app.window));
-});
-
 function checkWindowBounds(windowElement) {
   // if window is out of bounds, move it back to center of screen
   const maxY = window.innerHeight - windowElement.offsetHeight;
@@ -227,3 +317,7 @@ function checkWindowBounds(windowElement) {
       window.innerWidth / 2 - windowElement.offsetWidth / 2 + "px";
   }
 }
+
+// Start the application
+
+init();
