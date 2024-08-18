@@ -62,6 +62,7 @@ function log(message) {
 function init() {
   const windows = setupWindows();
   setupStartMenu(windows);
+  setupTaskbar(windows);
 
   const startButton = document.getElementById("start-button");
   startButton.addEventListener("click", () => {
@@ -197,6 +198,21 @@ function setupStartMenu(windows) {
   `;
   windows.forEach((w) => {
     startMenu.innerHTML += itemTemplate(w.id, w.title);
+  });
+}
+
+function setupTaskbar(windows) {
+  console.log("Setting up taskbar");
+  const taskbar = document.getElementById("taskbar");
+  const itemTemplate = (id, title) => `
+    <li class="nav-item">
+      <button class="nav-link" id="window${id}-taskbar-button">
+        ${title}
+      </button>
+    </li>
+  `;
+  windows.forEach((w) => {
+    taskbar.innerHTML += itemTemplate(w.id, w.title);
   });
 }
 
