@@ -13,8 +13,8 @@ for (let i = 1; i <= nWindows; i++) {
 }
 
 // Make the windows draggable:
-windows.forEach((w) => dragElement(w));
-function dragElement(elmnt) {
+windows.forEach((w) => makeDraggable(w));
+function makeDraggable(elmnt) {
   let pos1 = 0;
   let pos2 = 0;
   let pos3 = 0;
@@ -24,8 +24,6 @@ function dragElement(elmnt) {
     // if present, the header is where you move the DIV from:
     const header = document.getElementById(`${elmnt.id}-header`);
     header.onmousedown = dragMouseDown;
-    // when click on header, set z-index to currentZ
-    header.onclick = function () {};
   } else {
     // otherwise, move the DIV from anywhere inside the DIV:
     elmnt.onmousedown = dragMouseDown;
@@ -41,11 +39,11 @@ function dragElement(elmnt) {
     elmnt.style.zIndex = currentZ++;
     log(currentZ);
 
+    document.onmousemove = startDragElement;
     document.onmouseup = stopDragElement;
-    document.onmousemove = elementDrag;
   }
 
-  function elementDrag(e) {
+  function startDragElement(e) {
     e = e || window.event;
     e.preventDefault();
     // calculate the new cursor position:
@@ -54,7 +52,7 @@ function dragElement(elmnt) {
     pos3 = e.clientX;
     pos4 = e.clientY;
     //Check max and min constraints
-    const minY = 46;
+    const minY = 56;
     const minX = 0;
     const maxY = window.innerHeight - elmnt.offsetHeight;
     const maxX = window.innerWidth - elmnt.offsetWidth;
@@ -77,8 +75,8 @@ function dragElement(elmnt) {
 
   function stopDragElement() {
     // stop moving when mouse button is released:
-    document.onmouseup = null;
     document.onmousemove = null;
+    document.onmouseup = null;
   }
 }
 
@@ -87,10 +85,7 @@ windows.forEach((w) => {
   const windowToggle = document.getElementById(`${w.id}-taskbar-button`);
   windowToggle.addEventListener("click", () => toggleWindowDisplay(w));
   const minimizeButton = document.getElementById(`${w.id}-minimize-button`);
-  minimizeButton.addEventListener(
-    "click",
-    () => toggleWindowDisplay(w)
-  );
+  minimizeButton.addEventListener("click", () => toggleWindowDisplay(w));
 });
 
 function toggleWindowDisplay(elmnt) {
