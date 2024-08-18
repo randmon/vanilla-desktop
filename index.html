@@ -1,104 +1,171 @@
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Randmon</title>
 
-    <link rel="stylesheet" href="/assets/css/desktop.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
-</head>
+    <link rel="stylesheet" href="/css/desktop.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+  </head>
 
-<body>
+  <body>
     <nav class="navbar navbar-light">
-        <button class="navbar-brand" id="homeButton" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-burger"></i></button>
-        <div class="dropdown-menu" aria-labelledby="homeButton">
-            <a class="dropdown-item">Welcome!</a>
-            <a class="dropdown-item">Frog</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item">Window3</a>
-        </div>
-        <ul class="navbar-nav mr-auto flex-row">
-            <li class="nav-item">
-            </li>
-            <li class="nav-item">
-                <button class="nav-link" id="window1Toggle">Welcome!</button>
-            </li>
-            <li class="nav-item">
-                <button class="nav-link" id="window2Toggle" href="#">FrogFrogFrogFrogFrogFrogFrogFrogFrogFrogFrog</button>
-            </li>
-            <li>
-                <button class="nav-link" id="window3Toggle" id="testDropdown">Window 3</button>
-            </li>
-        </ul>
-        <button id="desktopButton"></button>
+      <button
+        class="navbar-brand"
+        id="home-button"
+        role="button"
+        data-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <i class="fa-solid fa-burger"></i>
+      </button>
+      <div class="dropdown-menu" aria-labelledby="home-button">
+        <a id="window1StartMenuButton" class="dropdown-item">Welcome!</a>
+        <a id="window2StartMenuButton" class="dropdown-item">Frog</a>
+        <div class="dropdown-divider"></div>
+        <a id="window3StartMenuButton" class="dropdown-item">Window3</a>
+      </div>
+      <ul class="navbar-nav mr-auto flex-row">
+        <li class="nav-item"></li>
+        <li class="nav-item">
+          <button class="nav-link" id="window1-taskbar-button">Welcome!</button>
+        </li>
+        <li class="nav-item">
+          <button class="nav-link" id="window2-taskbar-button" href="#">
+            FrogFrogFrogFrogFrogFrogFrogFrogFrogFrogFrog
+          </button>
+        </li>
+        <li>
+          <button class="nav-link" id="window3-taskbar-button" id="testDropdown">
+            Window 3
+          </button>
+        </li>
+      </ul>
+      <button id="desktopButton"></button>
     </nav>
     <main>
-        <div class="d-flex flex-column p-4">
-            <!-- icons credit: https://help.hackernoon.com/social-media-icons-pixelated -->
-            <a href="https://www.linkedin.com/in/cristinacmarques/" target="_blank" class="desktopIcon">
-                <img src="/assets/img/new/linkedin.png" alt="">
-                <p>LinkedIn</p>
-            </a>
-            <a href="https://github.com/randmon" target="_blank" class="desktopIcon">
-                <img src="/assets/img/new/github.png" alt="">
-                <p>GitHub</p>
-            </a>
-            <a href="https://twitter.com/randm0n" target="_blank" class="desktopIcon">
-                <img src="/assets/img/new/twitter.png" alt="">
-                <p>Twitter</p>
-            </a>
-            <a href="https://www.instagram.com/cristinacmarques/" target="_blank" class="desktopIcon">
-                <img src="/assets/img/new/instagram.png" alt="">
-                <p>Instagram</p>
-            </a>
-        </div>
+      <div class="d-flex flex-column p-4">
+        <!-- icons credit: https://help.hackernoon.com/social-media-icons-pixelated -->
+        <a
+          href="https://www.linkedin.com/in/cristinacmarques/"
+          target="_blank"
+          class="desktopIcon"
+        >
+          <img src="/assets/img/linkedin.png" alt="" />
+          <p>LinkedIn</p>
+        </a>
+        <a
+          href="https://github.com/randmon"
+          target="_blank"
+          class="desktopIcon"
+        >
+          <img src="/assets/img/github.png" alt="" />
+          <p>GitHub</p>
+        </a>
+        <a
+          href="https://twitter.com/randm0n"
+          target="_blank"
+          class="desktopIcon"
+        >
+          <img src="/assets/img/twitter.png" alt="" />
+          <p>Twitter</p>
+        </a>
+        <a
+          href="https://www.instagram.com/the_randmon/"
+          target="_blank"
+          class="desktopIcon"
+        >
+          <img src="/assets/img/instagram.png" alt="" />
+          <p>Instagram</p>
+        </a>
+      </div>
     </main>
     <!-- Windows -->
-    <div class="toggleableWindow" id="window1" style="visibility: visible; opacity: 1; top: 90px; left: 150px;">
-        <div class="toggleableWindowHeader d-flex flex-row justify-content-between" id="window1header">
-            <p>Welcome!</p>
-            <div class="d-flex flex-row">
-                <button class="ml-1"><i class="fa-regular fa-window-minimize"></i></button>
-                <button class="ml-1"><i class="fa-regular fa-x"></i></button>
-            </div>
+    <div
+      class="toggleableWindow"
+      id="window1"
+      style="visibility: visible; opacity: 1; top: 90px; left: 150px"
+    >
+      <div
+        class="toggleableWindowHeader d-flex flex-row justify-content-between"
+        id="window1header"
+      >
+        <p>Welcome!</p>
+        <div class="d-flex flex-row">
+          <button id="window1MinimizeButton" class="ml-1">
+            <i class="fa-regular fa-window-minimize"></i>
+          </button>
+          <button class="ml-1"><i class="fa-regular fa-x"></i></button>
         </div>
-        <div class="windowContent">
-            <p>Welcome to this random website!</p>
-            <p>Have a look around 👀</p>
-        </div>
+      </div>
+      <div class="windowContent">
+        <p>Welcome to this random website!</p>
+        <p>Have a look around 👀</p>
+      </div>
     </div>
     <div class="toggleableWindow" id="window2">
-        <div class="toggleableWindowHeader d-flex flex-row justify-content-between" id="window2header">
-            <p>FrogFrogFrogFrogFrogFrogFrogFrogFrogFrogFrog</p>
-            <div class="d-flex flex-row">
-                <button class="ml-1"><i class="fa-regular fa-window-minimize"></i></button>
-                <button class="ml-1"><i class="fa-regular fa-x"></i></button>
-            </div>
+      <div
+        class="toggleableWindowHeader d-flex flex-row justify-content-between"
+        id="window2header"
+      >
+        <p>FrogFrogFrogFrogFrogFrogFrogFrogFrogFrogFrog</p>
+        <div class="d-flex flex-row">
+          <button class="ml-1">
+            <i class="fa-regular fa-window-minimize"></i>
+          </button>
+          <button class="ml-1"><i class="fa-regular fa-x"></i></button>
         </div>
-        <div class="windowContent" style="text-align: center;">
-            <img src="/assets/img/frog_circle.png" alt="">
-        </div>
+      </div>
+      <div class="windowContent" style="text-align: center">
+        <img src="/assets/img/frog_circle.png" alt="" />
+      </div>
     </div>
     <div class="toggleableWindow" id="window3">
-        <div class="toggleableWindowHeader d-flex flex-row justify-content-between" id="window3header">
-            <p>Window 3</p>
-            <div class="d-flex flex-row">
-                <button class="ml-1"><i class="fa-regular fa-window-minimize"></i></button>
-                <button class="ml-1"><i class="fa-regular fa-x"></i></button>
-            </div>
+      <div
+        class="toggleableWindowHeader d-flex flex-row justify-content-between"
+        id="window3header"
+      >
+        <p>Window 3</p>
+        <div class="d-flex flex-row">
+          <button class="ml-1">
+            <i class="fa-regular fa-window-minimize"></i>
+          </button>
+          <button class="ml-1"><i class="fa-regular fa-x"></i></button>
         </div>
-        <div class="windowContent">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum molestias quisquam dolores autem impedit accusantium magnam distinctio corrupti accusamus sunt.
-        </div>
+      </div>
+      <div class="windowContent">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum molestias
+        quisquam dolores autem impedit accusantium magnam distinctio corrupti
+        accusamus sunt.
+      </div>
     </div>
-    <footer class="footer"> &copy; Randmon</footer>
-</body>
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<script src="../assets/js/new.js"></script>
-
+    <footer class="footer">&copy; Randmon</footer>
+  </body>
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"
+  ></script>
+  <script src="../assets/js/new.js"></script>
 </html>
