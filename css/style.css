@@ -32,7 +32,7 @@ body {
   white-space: nowrap;
   text-overflow: ellipsis;
   background: linear-gradient(165deg, #e9dffd 0%, #b092f0 100%);
-  border: 2px solid #ffffff00;
+  border: 1px solid #ffffff00;
   color: rgba(35, 32, 54, 0.6);
 }
 
@@ -58,6 +58,16 @@ body {
   padding: 5px 10px;
 }
 
+.taskbar-active {
+  background: #9881c4 !important;
+  border: 1px solid #7761a1 !important;
+  color: white !important;
+}
+
+.taskbar-active button {
+  color: #000000 !important;
+}
+
 #desktop-button {
   width: 30px;
   height: 38px;
@@ -67,11 +77,19 @@ body {
 
 .toggleableWindow {
   position: absolute;
-  border: 1px solid #d3d3d3;
+  border: 3px solid #d3d3d3;
+  border-radius: 8px;
+  overflow: hidden;
   width: 300px;
   visibility: hidden;
   opacity: 0;
   transition: visibility 0s, opacity 0.2s;
+  filter: brightness(0.9) grayscale(0.5) sepia(0.1);
+}
+
+.window-active {
+  border: 3px solid #a08bc7;
+  filter: none;
 }
 
 .toggleableWindow-header {
@@ -91,6 +109,7 @@ body {
   background-attachment: fixed;
   color: #fff;
   text-align: left;
+  user-select: none;
 }
 
 .toggleableWindow-header p {
