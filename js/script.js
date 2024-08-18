@@ -1,6 +1,6 @@
 // Variables
 
-const debug = true;
+const debug = false;
 let currentZ = 10;
 let currentActiveWindow = "window1";
 const applications = [];
@@ -100,6 +100,9 @@ function init() {
       toggleAppDisplay(app);
     });
   });
+  applications.forEach((app) => app.setTaskbarVisible(false));
+  openApp(applications[1]);
+  toggleAppDisplay(applications[1]);
   openApp(applications[0]);
 
   // Show desktop button hides all windows
@@ -167,6 +170,18 @@ function setupWindows() {
   </div>
   `;
 
+  const window4Content = `
+  <div class="windowContent">
+    <div class="d-flex flex-column align-items-center">
+      <div class="d-flex flex-row">
+        <p class="dice-roll-result" id="dice-roll-result-1">?</p>
+        <p class="dice-roll-result" id="dice-roll-result-2">?</p>
+      </div>
+      <button id="roll-dice-button">Roll Dice</button>
+    </div>
+  </div>
+  `;
+
   const windows = [
     new ApplicationContent(1, "Welcome!", window1Content),
     new ApplicationContent(
@@ -175,6 +190,7 @@ function setupWindows() {
       window2Content
     ),
     new ApplicationContent(3, "Lorem Ipsum", window3Content),
+    new ApplicationContent(4, "Dice Roller", window4Content),
   ];
 
   windows.forEach((w) => {
@@ -185,11 +201,47 @@ function setupWindows() {
     );
   });
 
+  document.getElementById("roll-dice-button").addEventListener("click", () => {
+    rollDice();
+  });
+
   return windows;
 }
 
+function rollDice() {
+  const colors = [
+    "#8e8a95",
+    "#e25f5f",
+    "#d7b43e",
+    "#95b507",
+    "#1f6fcc",
+    "#554fd4",
+    "#aa3ad2",
+  ];
+
+  // show an animation of the dice rolling
+  const dice1 = document.getElementById("dice-roll-result-1");
+  const dice2 = document.getElementById("dice-roll-result-2");
+
+  dice1.innerText = "?";
+  dice2.innerText = "?";
+  dice1.style.backgroundColor = colors[0];
+  dice2.style.backgroundColor = colors[0];
+
+  setTimeout(() => {
+    const result1 = Math.floor(Math.random() * 6) + 1;
+    const result2 = Math.floor(Math.random() * 6) + 1;
+
+    dice1.innerText = result1;
+    dice2.innerText = result2;
+
+    dice1.style.backgroundColor = colors[result1];
+    dice2.style.backgroundColor = colors[result2];
+  }, 300);
+}
+
 function setupStartMenu(windows) {
-  console.log("Setting up start menu");
+  log("Setting up start menu");
   const startMenu = document.getElementById("start-menu");
   const itemTemplate = (id, title) => `
     <a id="window${id}-start-button" class="dropdown-item">
@@ -202,7 +254,7 @@ function setupStartMenu(windows) {
 }
 
 function setupTaskbar(windows) {
-  console.log("Setting up taskbar");
+  log("Setting up taskbar");
   const taskbar = document.getElementById("taskbar");
   const itemTemplate = (id, title) => `
     <li class="nav-item">

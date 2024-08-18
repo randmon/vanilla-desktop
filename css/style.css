@@ -203,3 +203,18 @@ img {
   color: #7382fa;
   text-decoration: underline 2px solid #7382fa;
 }
+
+/* ---- APPLICATIONS ---- */
+
+.dice-roll-result {
+  font-size: 3em;
+  font-weight: bold;
+  text-align: center;
+  color: white;
+  background-color: #8e8a95;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  width: 100px;
+  height: 100px;
+}
