@@ -8,12 +8,20 @@ const log = (message) => {
   if (debug) console.log(message);
 };
 
+const startButton = document.getElementById("start-button");
+startButton.addEventListener("click", () => {
+  deactivateAllApps();
+  currentActiveWindow = "start-menu";
+});
+
 class Application {
-  constructor(id, window, taskbarButton, minimizeButton) {
+  constructor(id, window, startButton, taskbarButton, minimizeButton, closeButton) {
     this.id = id;
     this.window = window;
+    this.startButton = startButton;
     this.taskbarButton = taskbarButton;
     this.minimizeButton = minimizeButton;
+    this.closeButton = closeButton;
   }
 
   setActive(active) {
@@ -21,9 +29,18 @@ class Application {
       this.taskbarButton.classList.add("taskbar-active");
       this.window.classList.add("window-active");
       currentActiveWindow = this.id;
+      this.setTaskbarVisible(true);
     } else {
       this.taskbarButton.classList.remove("taskbar-active");
       this.window.classList.remove("window-active");
+    }
+  }
+
+  setTaskbarVisible(visible) {
+    if (visible) {
+      this.taskbarButton.style.display = "block";
+    } else {
+      this.taskbarButton.style.display = "none";
     }
   }
 }
@@ -34,31 +51,43 @@ for (let i = 1; i <= nWindows; i++) {
   const app = new Application(
     id,
     document.getElementById(id),
+    document.getElementById(`${id}-start-button`),
     document.getElementById(`${id}-taskbar-button`),
-    document.getElementById(`${id}-minimize-button`)
+    document.getElementById(`${id}-minimize-button`),
+    document.getElementById(`${id}-close-button`)
   );
   applications.push(app);
 
   app.taskbarButton.addEventListener("click", () => {
-    taskbarButtonClicked(app);
-  });
-  app.minimizeButton.addEventListener("click", () => {
-    toggleWindowDisplay(app);
+    openApp(app);
   });
   app.window.addEventListener("mousedown", () => {
     setActiveApp(app);
   });
   makeDraggable(app.window);
+  app.startButton.addEventListener("click", () => {
+    openApp(app);
+  });
+  app.minimizeButton.addEventListener("click", () => {
+    toggleAppDisplay(app);
+  });
+  app.closeButton.addEventListener("click", () => {
+    app.setTaskbarVisible(false);
+    toggleAppDisplay(app);
+  });
 }
 setActiveApp(applications[0]);
 
 function setActiveApp(app) {
-  applications.forEach((a) => {
-    a.setActive(false);
-  });
-
+  deactivateAllApps();
   app.setActive(true);
   app.window.style.zIndex = currentZ++;
+}
+
+function deactivateAllApps() {
+  applications.forEach((app) => {
+    app.setActive(false);
+  });
 }
 
 function makeDraggable(elmnt) {
@@ -124,15 +153,15 @@ function makeDraggable(elmnt) {
   }
 }
 
-function taskbarButtonClicked(app) {
+function openApp(app) {
   // If app is not visible, show it and set active
   if (app.window.style.visibility != "visible") {
-    toggleWindowDisplay(app);
+    toggleAppDisplay(app);
     setActiveApp(app);
   } else {
     // if it is the active window, minimize it
     if (currentActiveWindow == app.id) {
-      toggleWindowDisplay(app);
+      toggleAppDisplay(app);
     } else {
       // if it is not the active window, set it as active
       setActiveApp(app);
@@ -140,7 +169,7 @@ function taskbarButtonClicked(app) {
   }
 }
 
-function toggleWindowDisplay(app) {
+function toggleAppDisplay(app) {
   if (app.window.style.visibility != "visible") {
     log(`showing element [${app.window.id}]`);
 

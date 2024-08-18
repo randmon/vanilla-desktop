@@ -15,6 +15,12 @@ body {
   background-size: 40px 40px;
 }
 
+/* ---- START MENU ---- */
+
+.dropdown-item:hover {
+  background: linear-gradient(165deg, #e9dffd 0%, #b092f0 100%);
+}
+
 /* ---- TASK BAR ---- */
 
 .navbar {

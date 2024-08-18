@@ -4,7 +4,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta property="og:title" content="Randmon" />
-    <meta property="og:image" content="https://randmon.github.io/vanilla-desktop/img/frog_circle.png" />
+    <meta
+      property="og:image"
+      content="https://randmon.github.io/vanilla-desktop/img/frog_circle.png"
+    />
     <meta
       property="og:description"
       content="A cool website made with HTML, CSS, and JavaScript"
@@ -51,7 +54,7 @@
     <nav class="navbar">
       <button
         class="navbar-brand"
-        id="home-button"
+        id="start-button"
         role="button"
         data-toggle="dropdown"
         aria-haspopup="true"
@@ -60,10 +63,10 @@
         <i class="fa-solid fa-burger"></i>
       </button>
       <div class="dropdown-menu" aria-labelledby="home-button">
-        <a id="window1-start-menu-button" class="dropdown-item">Welcome!</a>
-        <a id="window2-start-menu-button" class="dropdown-item">Frog</a>
+        <a id="window1-start-button" class="dropdown-item">Welcome!</a>
+        <a id="window2-start-button" class="dropdown-item">Frog</a>
         <div class="dropdown-divider"></div>
-        <a id="window3-start-menu-button" class="dropdown-item">Window3</a>
+        <a id="window3-start-button" class="dropdown-item">Window3</a>
       </div>
       <ul class="navbar-nav mr-auto flex-row">
         <li class="nav-item">
@@ -132,7 +135,9 @@
           <button id="window1-minimize-button" class="ml-1">
             <i class="fa-regular fa-window-minimize"></i>
           </button>
-          <button class="ml-1"><i class="fa-regular fa-x"></i></button>
+          <button id="window1-close-button" class="ml-1">
+            <i class="fa-regular fa-x"></i>
+          </button>
         </div>
       </div>
       <div class="windowContent">
@@ -150,7 +155,9 @@
           <button id="window2-minimize-button" class="ml-1">
             <i class="fa-regular fa-window-minimize"></i>
           </button>
-          <button class="ml-1"><i class="fa-regular fa-x"></i></button>
+          <button id="window2-close-button" class="ml-1">
+            <i class="fa-regular fa-x"></i>
+          </button>
         </div>
       </div>
       <div class="windowContent" style="text-align: center">
@@ -167,7 +174,9 @@
           <button id="window3-minimize-button" class="ml-1">
             <i class="fa-regular fa-window-minimize"></i>
           </button>
-          <button class="ml-1"><i class="fa-regular fa-x"></i></button>
+          <button id="window3-close-button" class="ml-1">
+            <i class="fa-regular fa-x"></i>
+          </button>
         </div>
       </div>
       <div class="windowContent">
