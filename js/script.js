@@ -61,6 +61,7 @@ function log(message) {
 
 function init() {
   const windows = setupWindows();
+  setupStartMenu(windows);
 
   const startButton = document.getElementById("start-button");
   startButton.addEventListener("click", () => {
@@ -184,6 +185,19 @@ function setupWindows() {
   });
 
   return windows;
+}
+
+function setupStartMenu(windows) {
+  console.log("Setting up start menu");
+  const startMenu = document.getElementById("start-menu");
+  const itemTemplate = (id, title) => `
+    <a id="window${id}-start-button" class="dropdown-item">
+      ${title}
+    </a>
+  `;
+  windows.forEach((w) => {
+    startMenu.innerHTML += itemTemplate(w.id, w.title);
+  });
 }
 
 function openApp(app) {

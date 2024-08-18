@@ -17,6 +17,14 @@ body {
 
 /* ---- START MENU ---- */
 
+.dropdown-item {
+  max-width: 250px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+
 .dropdown-item:hover {
   background: #a08bc7 !important;
   color: white !important;
